@@ -1,115 +1,53 @@
-import { useState } from 'react';
-import regionList from '../data/regionList.json';
+import React, { useState } from 'react';
+import FirstStep from '../components/FirstStep';
+import SecondStep from '../components/SecondStep';
 
 export default function Home() {
+  const [step, setStep] = useState('first');
   const [estateType, setEstateType] = useState('');
   const [region, setRegion] = useState('');
   const [district, setDistrict] = useState('');
 
-  console.log(regionList);
+  const handleChangeType = (e) => {
+    setEstateType(e.target.value);
+  };
 
-  const filteredRegion = regionList.filter((item) => item.region === region);
+  const handleChangeRegion = (e) => {
+    setRegion(e.target.value);
+  };
 
-  const filteredDistrict = filteredRegion.map((item) => item.district);
+  const handleChangeDistrict = (e) => {
+    setDistrict(e.target.value);
+  };
+
+  const handleClick = (e) => {
+    setStep(e.currentTarget.value);
+  };
 
   console.log('typ: ', estateType, 'region:', region, 'okres:', district);
+
+  console.log(step);
 
   return (
     <div>
       <h1>REAS</h1>
-
       <form>
-        <label>
-          Typ nemovitosti:
-          <select
-            value={estateType}
-            type="text"
-            onChange={(e) => setEstateType(e.target.value)}
-          >
-            <option value="byt">byt</option>
-            <option value="dům">dům</option>
-            <option value="pozemek">pozemek</option>
-          </select>
-        </label>
+        {step === 'first' ? (
+          <FirstStep
+            handleChangeType={handleChangeType}
+            handleChangeRegion={handleChangeRegion}
+            handleChangeDistrict={handleChangeDistrict}
+            handleClick={handleClick}
+            estateType={estateType}
+            region={region}
+            district={district}
+            step={step}
+          />
+        ) : (
+          ''
+        )}
 
-        <br />
-        <br />
-
-        <label>
-          Kraj:
-          <select
-            value={region}
-            type="text"
-            onChange={(e) => setRegion(e.target.value)}
-          >
-            {regionList.map((item) => (
-              <option key={item.region} value={item.region}>
-                {item.region}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <br />
-        <br />
-
-        <label>
-          Okres:
-          <select
-            disabled={region === '' ? true : false}
-            value={district}
-            type="text"
-            onChange={(e) => setDistrict(e.target.value)}
-          >
-            {region !== ''
-              ? filteredDistrict[0].map((item) => (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                ))
-              : ''}
-            {/* {filteredDistrict[0].map((item) => (
-              <option>{item}</option>
-            ))} */}
-          </select>
-        </label>
-
-        {/* <br />
-        <br />
-
-        <label>
-          Příjmení:
-          <input value="" type="text" />
-        </label>
-
-        <br />
-        <br />
-
-        <label>
-          Křestní jméno:
-          <input value="" type="text" />
-        </label>
-
-        <br />
-        <br />
-
-        <label>
-          Telfoní číslo:
-          <input value="" type="number" />
-        </label>
-
-        <br />
-        <br />
-
-        <label>
-          Email:
-          <input value="" type="text" />
-        </label> */}
-
-        <br />
-        <br />
-
-        <button>Odeslav formulář</button>
+        {step === 'second' ? <SecondStep /> : ''}
       </form>
     </div>
   );
