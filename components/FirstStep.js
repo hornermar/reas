@@ -25,8 +25,6 @@ const useStyles = makeStyles((theme) => ({
 const FirstStep = (props) => {
   const classes = useStyles();
 
-  console.log(regionList);
-
   const filteredRegion = regionList.filter(
     (item) => item.region === props.region,
   );

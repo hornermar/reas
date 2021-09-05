@@ -7,6 +7,9 @@ export default function Home() {
   const [estateType, setEstateType] = useState('');
   const [region, setRegion] = useState('');
   const [district, setDistrict] = useState('');
+  const [fullName, setFullName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
 
   const handleChangeType = (e) => {
     setEstateType(e.target.value);
@@ -20,11 +23,16 @@ export default function Home() {
     setDistrict(e.target.value);
   };
 
+  const handleChangeName = (e) => {
+    setFullName(e.target.value);
+  };
+
   const handleClick = (e) => {
     setStep(e.currentTarget.value);
   };
 
   console.log('typ: ', estateType, 'region:', region, 'okres:', district);
+  console.log('jméno: ', fullName);
 
   console.log(step);
 
@@ -47,7 +55,15 @@ export default function Home() {
           ''
         )}
 
-        {step === 'second' ? <SecondStep /> : ''}
+        {step === 'second' ? (
+          <SecondStep
+            handleClick={handleClick}
+            handleChangeName={handleChangeName}
+            fullName={fullName}
+          />
+        ) : (
+          ''
+        )}
       </form>
     </div>
   );
