@@ -1,24 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import FirstStep from './components/FirstStep';
 import SecondStep from './components/SecondStep';
+import ThirdStep from './components/ThirdStep';
+import Container from '@material-ui/core/Container';
 
 import { useDispatch } from 'react-redux';
 import { createClient, getClients } from './action/newClient';
 
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
-      margin: theme.spacing(1),
+      margin: theme.spacing(3),
+      width: '500px',
     },
+  },
+  button: {
+    marginRight: theme.spacing(1),
+  },
+  instructions: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
   },
 }));
 
+function getSteps() {
+  return ['Údaje o nemovitosti', 'Kontaktní informace', 'Dokončení'];
+}
+
 function App() {
   const classes = useStyles();
-  const [step, setStep] = useState('first');
+
+  const [activeStep, setActiveStep] = useState(0);
+  const steps = getSteps();
   const [data, setData] = useState({
     estateType: '',
     region: '',
@@ -34,56 +52,75 @@ function App() {
     dispatch(getClients());
   }, [dispatch]);
 
-  const handleChangePhone = (e) => {
-    setData({ ...data, phone: e.target.value });
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
-  const handleChangeEmail = (e) => {
-    setData({ ...data, email: e.target.value });
-  };
-
-  const handleClick = (e) => {
-    setStep(e.currentTarget.value);
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(createClient(data));
-    console.log(data);
+    setActiveStep(0);
+    setData({
+      estateType: '',
+      region: '',
+      district: '',
+      fullName: '',
+      phone: '',
+      email: '',
+    });
   };
 
   return (
-    <div>
-      <h1>REAS</h1>
-      <form onSubmit={handleSubmit}>
-        {step === 'first' ? (
-          <FirstStep handleClick={handleClick} data={data} setData={setData} />
-        ) : (
-          ''
-        )}
+    <Container maxWidth="sm">
+      <div className={classes.root}>
+        <Stepper activeStep={activeStep}>
+          {steps.map((label, index) => {
+            const stepProps = {};
+            const labelProps = {};
 
-        {/* {step === 'second' ? ( */}
-        <SecondStep
-          handleClick={handleClick}
-          handleChangePhone={handleChangePhone}
-          handleChangeEmail={handleChangeEmail}
-          data={data}
-          setData={setData}
-        />
-        {/* ) : (
-          ''
-        )} */}
+            return (
+              <Step key={label} {...stepProps}>
+                <StepLabel {...labelProps}>{label}</StepLabel>
+              </Step>
+            );
+          })}
+        </Stepper>
 
-        <br />
-        <br />
-        <br />
-        <br />
+        <form
+          onSubmit={handleSubmit}
+          className={classes.root}
+          noValidate
+          autoComplete="off"
+        >
+          {activeStep === 0 ? (
+            <FirstStep handleNext={handleNext} data={data} setData={setData} />
+          ) : (
+            ''
+          )}
 
-        <Button type="submit" variant="contained" color="primary">
-          Odeslat formulář
-        </Button>
-      </form>
-    </div>
+          {activeStep === 1 ? (
+            <SecondStep
+              handleNext={handleNext}
+              handleBack={handleBack}
+              data={data}
+              setData={setData}
+            />
+          ) : (
+            ''
+          )}
+
+          {activeStep === 2 ? (
+            <ThirdStep data={data} handleBack={handleBack} />
+          ) : (
+            ''
+          )}
+        </form>
+      </div>
+    </Container>
   );
 }
 

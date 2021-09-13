@@ -1,92 +1,59 @@
-import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
-import { makeStyles } from '@material-ui/core/styles';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Input from '@material-ui/core/Input';
-
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 300,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-    },
-  },
-}));
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 
 const SecondStep = (props) => {
-  const classes = useStyles();
-
   return (
     <>
-      <h2>Osobí údaje</h2>
-      <p>2/2</p>
+      <Typography variant="h5" gutterBottom>
+        Kontakntí informace
+      </Typography>
 
-      <br />
-      <br />
+      <TextField
+        label="Celé jméno"
+        id="full-name"
+        type="text"
+        value={props.data.fullName}
+        onChange={(e) => {
+          props.setData({ ...props.data, fullName: e.target.value });
+        }}
+      />
 
-      <FormControl
-      // error
-      >
-        <InputLabel htmlFor="component-error">Celé jméno</InputLabel>
-        <Input
-          id="component-error"
-          value={props.data.fullName}
-          onChange={(e) => {
-            props.setData({ ...props.data, fullName: e.target.value });
-          }}
-          aria-describedby="component-error-text"
-        />
-        <FormHelperText id="component-error-text">{/* Error */}</FormHelperText>
-      </FormControl>
+      <TextField
+        value={props.data.phone}
+        onChange={(e) => {
+          props.setData({ ...props.data, phone: e.target.value });
+        }}
+        label="Telefonní číslo"
+        id="phone-number"
+        inputMode="numeric"
+      />
 
-      <br />
-      <br />
-
-      <FormControl
-      // error
-      >
-        <InputLabel htmlFor="component-error">Telefonní číslo</InputLabel>
-        <Input
-          id="component-error"
-          value={props.data.phone}
-          onChange={props.handleChangePhone}
-          aria-describedby="component-error-text"
-        />
-        <FormHelperText id="component-error-text">{/* Error */}</FormHelperText>
-      </FormControl>
-
-      <br />
-      <br />
-
-      <FormControl
-      // error
-      >
-        <InputLabel htmlFor="component-error">Email</InputLabel>
-        <Input
-          id="component-error"
-          value={props.data.email}
-          onChange={props.handleChangeEmail}
-          aria-describedby="component-error-text"
-        />
-        <FormHelperText id="component-error-text">{/* Error */}</FormHelperText>
-      </FormControl>
-
-      <br />
-      <br />
-
+      <TextField
+        value={props.data.email}
+        onChange={(e) => {
+          props.setData({ ...props.data, email: e.target.value });
+        }}
+        label="Email"
+        id="email"
+        type="text"
+      />
       <Button
         variant="contained"
         color="primary"
-        value="first"
-        onClick={props.handleClick}
+        onClick={props.handleNext}
+        disabled={
+          props.data.estateType === '' ||
+          props.data.region === '' ||
+          props.data.district === '' ||
+          props.data.phone === '' ||
+          props.data.email === '' ||
+          props.data.fullName === ''
+        }
       >
+        Další
+      </Button>
+      <Button variant="contained" color="primary" onClick={props.handleBack}>
         Zpět
       </Button>
     </>

@@ -1,30 +1,13 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import regionList from '../data/regionList.json';
-
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 300,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-    },
-  },
-}));
+import Typography from '@material-ui/core/Typography';
 
 const FirstStep = (props) => {
-  const classes = useStyles();
-
   const filteredRegion = regionList.filter(
     (item) => item.region === props.data.region,
   );
@@ -33,13 +16,15 @@ const FirstStep = (props) => {
 
   return (
     <>
-      <h2>Nemovitost</h2>
-      <p>1/2</p>
-      <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">Typ</InputLabel>
+      <Typography variant="h5" gutterBottom>
+        Údaje o nemovitosti
+      </Typography>
+
+      <FormControl>
+        <InputLabel id="estate-type-label">Typ</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+          labelId="estate-type-label"
+          id="estate-type"
           value={props.data.estateType}
           onChange={(e) => {
             props.setData({ ...props.data, estateType: e.target.value });
@@ -51,14 +36,11 @@ const FirstStep = (props) => {
         </Select>
       </FormControl>
 
-      <br />
-      <br />
-
-      <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">Kraj</InputLabel>
+      <FormControl>
+        <InputLabel id="region-label">Kraj</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+          labelId="region-label"
+          id="region"
           value={props.data.region}
           onChange={(e) => {
             props.setData({ ...props.data, region: e.target.value });
@@ -72,15 +54,12 @@ const FirstStep = (props) => {
         </Select>
       </FormControl>
 
-      <br />
-      <br />
-
-      <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">Okres</InputLabel>
+      <FormControl>
+        <InputLabel id="district-label">Okres</InputLabel>
         <Select
           disabled={props.data.region === '' ? true : false}
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+          labelId="district-label"
+          id="district"
           value={props.data.district}
           onChange={(e) => {
             props.setData({ ...props.data, district: e.target.value });
@@ -96,11 +75,6 @@ const FirstStep = (props) => {
         </Select>
       </FormControl>
 
-      <br />
-      <br />
-      <br />
-      <br />
-
       <Button
         variant="contained"
         color="primary"
@@ -109,8 +83,7 @@ const FirstStep = (props) => {
           props.data.region === '' ||
           props.data.district === ''
         }
-        value="second"
-        onClick={props.handleClick}
+        onClick={props.handleNext}
       >
         Další
       </Button>
