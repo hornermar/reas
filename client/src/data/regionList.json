@@ -1,0 +1,130 @@
+[
+  {
+    "region": "Hlavní město Praha",
+    "district": ["Praha (Hlavní město Praha)"]
+  },
+  {
+    "region": "Jihočeský kraj",
+    "district": [
+      "České Budějovice",
+      "Český Krumlov",
+      "Jindřichův Hradec",
+      "Písek",
+      "Prachatice",
+      "Strakonice",
+      "Tábor"
+    ]
+  },
+  {
+    "region": "Jihomoravský kraj",
+    "district": [
+      "Blansko",
+      "Brno-město",
+      "Brno-venkov",
+      "Břeclav",
+      "Hodonín",
+      "Vyškov",
+      "Znojmo"
+    ]
+  },
+  {
+    "region": "Karlovarský kraj",
+    "district": ["Cheb", " Karlovy Vary", "Sokolov"]
+  },
+  {
+    "region": "Kraj Vysočina",
+    "district": [
+      "Havlíčkův Brod",
+      "Jihlava",
+      "Pelhřimov",
+      "Třebíč",
+      "Žďár nad Sázavou"
+    ]
+  },
+  {
+    "region": "Královéhradecký kraj",
+    "district": [
+      " Hradec Králové",
+      "Jičín",
+      "Náchod",
+      "Rychnov nad Kněžnou",
+      "Trutnov"
+    ]
+  },
+  {
+    "region": "Liberecký kraj",
+    "district": [
+      "Domažlice",
+      "Klatovy",
+      "Plzeň-jih",
+      "Plzeň-město",
+      "Plzeň-sever",
+      "Rokycany",
+      "Tachov"
+    ]
+  },
+  {
+    "region": "Moravskoslezský kraj",
+    "district": [
+      "Bruntál",
+      "Frýdek-Místek",
+      "Karviná",
+      "Nový Jičín",
+      "Opava",
+      "Ostrava-město"
+    ]
+  },
+  {
+    "region": "Olomoucký kraj",
+    "district": ["Jeseník", "Olomouc", "Prostějov", "Přerov", "Šumperk"]
+  },
+  {
+    "region": "Pardubický kraj",
+    "district": ["Chrudim", "Pardubice", "Svitavy", "Ústí nad Orlicí"]
+  },
+  {
+    "region": "Plzeňský kraj",
+    "district": [
+      "Domažlice",
+      "Klatovy",
+      "Plzeň-jih",
+      "Plzeň-město",
+      "Plzeň-sever",
+      "Rokycany",
+      "Tachov"
+    ]
+  },
+  {
+    "region": "Středočeský kraj",
+    "district": [
+      "Benešov",
+      "Beroun",
+      "Kladno",
+      "Kolín",
+      "Kutná Hora",
+      "Mělník",
+      "Mladá Boleslav",
+      "Nymburk",
+      "Praha-východ",
+      "Praha-západ",
+      "Příbram",
+      "Rakovník"
+    ]
+  },
+  {
+    "region": "Ústecký kraj",
+    "district": [
+      "Děčín",
+      "Chomutov",
+      "Litoměřice",
+      "Louny",
+      "Most",
+      "Teplice",
+      "Ústí nad Labem"
+    ]
+  },
+  {
+    "region": "Zlínský kraj",
+    "district": ["Kroměříž", "Uherské Hradiště", "Vsetín", "Zlín"]
+  }
+]
