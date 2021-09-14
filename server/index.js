@@ -4,6 +4,7 @@ import cors from 'cors';
 import clientRoutes from './routes/newClient.js';
 
 const app = express();
+// dotenv.config();
 
 app.use(express.json({ extended: false }));
 app.use(express.urlencoded({ extended: false }));
@@ -11,8 +12,7 @@ app.use(cors());
 
 app.use('/lead', clientRoutes);
 
-const CONNECTION_URL =
-  'mongodb+srv://marketah:id7ufAMpPn3_KvE@cluster0.56y88.mongodb.net/mern?retryWrites=true&w=majority';
+const CONNECTION_URL = process.env.MONGOLAB_URI;
 const PORT = process.env.PORT || 5000;
 
 mongoose
