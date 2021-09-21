@@ -1,9 +1,11 @@
 [
   {
+    "id": "CZ-PR",
     "region": "Hlavní město Praha",
     "district": ["Praha (Hlavní město Praha)"]
   },
   {
+    "id": "CZ-JC",
     "region": "Jihočeský kraj",
     "district": [
       "České Budějovice",
@@ -16,6 +18,7 @@
     ]
   },
   {
+    "id": "CZ-JM",
     "region": "Jihomoravský kraj",
     "district": [
       "Blansko",
@@ -28,10 +31,12 @@
     ]
   },
   {
+    "id": "CZ-KA",
     "region": "Karlovarský kraj",
     "district": ["Cheb", " Karlovy Vary", "Sokolov"]
   },
   {
+    "id": "CZ-VY",
     "region": "Kraj Vysočina",
     "district": [
       "Havlíčkův Brod",
@@ -42,6 +47,7 @@
     ]
   },
   {
+    "id": "CZ-KR",
     "region": "Královéhradecký kraj",
     "district": [
       " Hradec Králové",
@@ -52,6 +58,7 @@
     ]
   },
   {
+    "id": "CZ-LI",
     "region": "Liberecký kraj",
     "district": [
       "Domažlice",
@@ -64,6 +71,7 @@
     ]
   },
   {
+    "id": "CZ-MO",
     "region": "Moravskoslezský kraj",
     "district": [
       "Bruntál",
@@ -75,14 +83,17 @@
     ]
   },
   {
+    "id": "CZ-OL",
     "region": "Olomoucký kraj",
     "district": ["Jeseník", "Olomouc", "Prostějov", "Přerov", "Šumperk"]
   },
   {
+    "id": "CZ-PA",
     "region": "Pardubický kraj",
     "district": ["Chrudim", "Pardubice", "Svitavy", "Ústí nad Orlicí"]
   },
   {
+    "id": "CZ-PL",
     "region": "Plzeňský kraj",
     "district": [
       "Domažlice",
@@ -95,6 +106,7 @@
     ]
   },
   {
+    "id": "CZ-ST",
     "region": "Středočeský kraj",
     "district": [
       "Benešov",
@@ -112,6 +124,7 @@
     ]
   },
   {
+    "id": "CZ-US",
     "region": "Ústecký kraj",
     "district": [
       "Děčín",
@@ -124,6 +137,7 @@
     ]
   },
   {
+    "id": "CZ-ZL",
     "region": "Zlínský kraj",
     "district": ["Kroměříž", "Uherské Hradiště", "Vsetín", "Zlín"]
   }

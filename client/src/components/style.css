@@ -1,0 +1,19 @@
+.region {
+  fill: transparent;
+  stroke: #3f51b5;
+  stroke-width: 2px;
+  cursor: pointer;
+}
+
+.region:hover {
+  fill: #3f51b5;
+  stroke: transparent;
+}
+
+title {
+  color: black;
+}
+
+.region_active {
+  fill: #3f51b5;
+}

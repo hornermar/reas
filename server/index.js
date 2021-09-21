@@ -11,7 +11,8 @@ app.use(cors());
 
 app.use('/lead', clientRoutes);
 
-const CONNECTION_URL = process.env.MONGOLAB_URI;
+const CONNECTION_URL =
+  
 const PORT = process.env.PORT || 5000;
 
 mongoose
@@ -19,4 +20,4 @@ mongoose
   .then(() =>
     app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)),
   )
-  .catch((err) => console.log(error.message));
+  .catch((error) => console.log(error.message));

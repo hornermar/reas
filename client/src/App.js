@@ -11,12 +11,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
+import FourthStep from './components/FourthStep';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(3),
-      width: '500px',
+      width: '620px',
     },
   },
   button: {
@@ -46,6 +47,8 @@ function App() {
     email: '',
   });
 
+  console.log(data);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -63,15 +66,15 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(createClient(data));
-    setActiveStep(0);
-    setData({
-      estateType: '',
-      region: '',
-      district: '',
-      fullName: '',
-      phone: '',
-      email: '',
-    });
+    setActiveStep(3);
+    // setData({
+    //   estateType: '',
+    //   region: '',
+    //   district: '',
+    //   fullName: '',
+    //   phone: '',
+    //   email: '',
+    // });
   };
 
   return (
@@ -119,6 +122,7 @@ function App() {
             ''
           )}
         </form>
+        {activeStep === 3 ? <FourthStep /> : ''}
       </div>
     </Container>
   );
