@@ -23,20 +23,29 @@ const SecondStep = (props) => {
         value={props.data.phone}
         onChange={(e) => {
           props.setData({ ...props.data, phone: e.target.value });
+          props.validatePhoneNumber(e.target.value)
+            ? props.setValidPhone(true)
+            : props.setValidPhone(false);
         }}
         label="Telefonní číslo"
         id="phone-number"
-        inputMode="numeric"
+        error={props.numberErr ? true : false}
+        helperText={props.numberErr ? 'Neplatné telefonní číslo.' : ''}
       />
 
       <TextField
         value={props.data.email}
         onChange={(e) => {
           props.setData({ ...props.data, email: e.target.value });
+          props.validateEmail(e.target.value)
+            ? props.setValidEmail(true)
+            : props.setValidEmail(false);
         }}
         label="Email"
         id="email"
         type="text"
+        error={props.emailErr ? true : false}
+        helperText={props.emailErr ? 'Neplatný email' : ''}
       />
       <Button
         variant="contained"

@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const clientSchema = mongoose.Schema({
   estateType: String,
   fullName: String,
-  phone: Number,
+  phone: String,
   email: String,
   region: String,
   district: String,

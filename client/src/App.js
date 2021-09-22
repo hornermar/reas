@@ -47,7 +47,14 @@ function App() {
     email: '',
   });
 
-  console.log(data);
+  const [validPhone, setValidPhone] = useState(true);
+  const [numberErr, setNumberErr] = useState(false);
+
+  const [validEmail, setValidEmail] = useState(true);
+  const [emailErr, setEmailErr] = useState(false);
+
+  // console.log(validPhone);
+  // console.log(data.phone);
 
   const dispatch = useDispatch();
 
@@ -55,8 +62,48 @@ function App() {
     dispatch(getClients());
   }, [dispatch]);
 
+  const validatePhoneNumber = (input_str) => {
+    var re = /^\d+$/;
+    const withoutSpace = input_str.replace(/ /g, '');
+
+    // console.log(withoutSpace);
+
+    if (withoutSpace.length === 9 && re.test(withoutSpace)) {
+      return true;
+    } else if (
+      withoutSpace.length === 13 &&
+      withoutSpace.startsWith('+420') &&
+      re.test(withoutSpace.slice(4, 12))
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const validateEmail = (input) => {
+    var re =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    return re.test(input);
+  };
+
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if (validPhone && validEmail) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
+
+    if (!validPhone) {
+      setNumberErr(true);
+    } else {
+      setNumberErr(false);
+    }
+
+    if (!validEmail) {
+      setEmailErr(true);
+    } else {
+      setEmailErr(false);
+    }
   };
 
   const handleBack = () => {
@@ -67,63 +114,60 @@ function App() {
     e.preventDefault();
     dispatch(createClient(data));
     setActiveStep(3);
-    // setData({
-    //   estateType: '',
-    //   region: '',
-    //   district: '',
-    //   fullName: '',
-    //   phone: '',
-    //   email: '',
-    // });
   };
 
   return (
-    <Container maxWidth="sm">
-      <div className={classes.root}>
-        <Stepper activeStep={activeStep}>
-          {steps.map((label, index) => {
-            const stepProps = {};
-            const labelProps = {};
+    <Container className={classes.root}>
+      <Stepper activeStep={activeStep}>
+        {steps.map((label) => {
+          const stepProps = {};
+          const labelProps = {};
 
-            return (
-              <Step key={label} {...stepProps}>
-                <StepLabel {...labelProps}>{label}</StepLabel>
-              </Step>
-            );
-          })}
-        </Stepper>
+          return (
+            <Step key={label} {...stepProps}>
+              <StepLabel {...labelProps}>{label}</StepLabel>
+            </Step>
+          );
+        })}
+      </Stepper>
 
-        <form
-          onSubmit={handleSubmit}
-          className={classes.root}
-          noValidate
-          autoComplete="off"
-        >
-          {activeStep === 0 ? (
-            <FirstStep handleNext={handleNext} data={data} setData={setData} />
-          ) : (
-            ''
-          )}
+      <form
+        onSubmit={handleSubmit}
+        className={classes.root}
+        noValidate
+        autoComplete="off"
+      >
+        {activeStep === 0 ? (
+          <FirstStep handleNext={handleNext} data={data} setData={setData} />
+        ) : (
+          ''
+        )}
 
-          {activeStep === 1 ? (
-            <SecondStep
-              handleNext={handleNext}
-              handleBack={handleBack}
-              data={data}
-              setData={setData}
-            />
-          ) : (
-            ''
-          )}
+        {activeStep === 1 ? (
+          <SecondStep
+            handleNext={handleNext}
+            handleBack={handleBack}
+            data={data}
+            setData={setData}
+            validPhone={validPhone}
+            setValidPhone={setValidPhone}
+            validatePhoneNumber={validatePhoneNumber}
+            numberErr={numberErr}
+            validateEmail={validateEmail}
+            setValidEmail={setValidEmail}
+            emailErr={emailErr}
+          />
+        ) : (
+          ''
+        )}
 
-          {activeStep === 2 ? (
-            <ThirdStep data={data} handleBack={handleBack} />
-          ) : (
-            ''
-          )}
-        </form>
-        {activeStep === 3 ? <FourthStep /> : ''}
-      </div>
+        {activeStep === 2 ? (
+          <ThirdStep data={data} handleBack={handleBack} />
+        ) : (
+          ''
+        )}
+      </form>
+      {activeStep === 3 ? <FourthStep /> : ''}
     </Container>
   );
 }

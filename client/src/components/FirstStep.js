@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
@@ -16,11 +16,7 @@ const FirstStep = (props) => {
     (item) => item.region === props.data.region,
   );
 
-  console.log(props.data.region);
-
   const handleClick = (e) => {
-    console.log(e.target.id);
-
     props.setData({ ...props.data, region: e.target.id });
   };
 
@@ -194,6 +190,7 @@ const FirstStep = (props) => {
           {props.data.region !== ''
             ? filteredDistrict[0].map((item) => (
                 <FormControlLabel
+                  key={item}
                   value={item}
                   control={<Radio color="primary" />}
                   label={item}
@@ -231,22 +228,6 @@ const FirstStep = (props) => {
           />
         </RadioGroup>
       </FormControl>
-
-      {/* <FormControl>
-        <InputLabel id="estate-type-label">Typ nemovitosti</InputLabel>
-        <Select
-          labelId="estate-type-label"
-          id="estate-type"
-          value={props.data.estateType}
-          onChange={(e) => {
-            props.setData({ ...props.data, estateType: e.target.value });
-          }}
-        >
-          <MenuItem value="byt">byt</MenuItem>
-          <MenuItem value="dům">dům</MenuItem>
-          <MenuItem value="pozemek">pozemek</MenuItem>
-        </Select>
-      </FormControl> */}
 
       <Button
         variant="contained"

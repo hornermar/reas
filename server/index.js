@@ -12,7 +12,7 @@ app.use(cors());
 app.use('/lead', clientRoutes);
 
 const CONNECTION_URL =
-  
+  'MONGOLAB_URI=mongodb+srv://marketah:id7ufAMpPn3_KvE@cluster0.56y88.mongodb.net/mern?retryWrites=true&w=majority';
 const PORT = process.env.PORT || 5000;
 
 mongoose
