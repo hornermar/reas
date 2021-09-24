@@ -15,17 +15,18 @@ import FourthStep from './components/FourthStep';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    '& > *': {
-      margin: theme.spacing(3),
-      width: '620px',
-    },
+    width: '80%',
+    maxWidth: '750px',
   },
   button: {
     marginRight: theme.spacing(1),
   },
-  instructions: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
+
+  formItem: {
+    '& > *': {
+      width: '100%',
+      margin: theme.spacing(2),
+    },
   },
 }));
 
@@ -132,8 +133,8 @@ function App() {
       </Stepper>
 
       <form
+        className={classes.formItem}
         onSubmit={handleSubmit}
-        className={classes.root}
         noValidate
         autoComplete="off"
       >

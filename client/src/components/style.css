@@ -1,8 +1,9 @@
 .region {
   fill: transparent;
   stroke: #3f51b5;
-  stroke-width: 2px;
+  stroke-width: 1px;
   cursor: pointer;
+  z-index: 100;
 }
 
 .region:hover {
@@ -10,8 +11,10 @@
   stroke: transparent;
 }
 
-title {
-  color: black;
+.region_text {
+  stroke: transparent;
+  fill: black;
+  font-size: 12px;
 }
 
 .region_active {

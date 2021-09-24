@@ -60,15 +60,7 @@
   {
     "id": "CZ-LI",
     "region": "Liberecký kraj",
-    "district": [
-      "Domažlice",
-      "Klatovy",
-      "Plzeň-jih",
-      "Plzeň-město",
-      "Plzeň-sever",
-      "Rokycany",
-      "Tachov"
-    ]
+    "district": ["Česká Lípa", "Jablonec nad Nisou", "Liberec", "Semily"]
   },
   {
     "id": "CZ-MO",
