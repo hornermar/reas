@@ -13,7 +13,7 @@ import './style.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '80%',
+    width: '100%',
     maxWidth: '750px',
   },
   button: {
@@ -25,6 +25,10 @@ const useStyles = makeStyles((theme) => ({
       width: '100%',
       margin: theme.spacing(2),
     },
+  },
+  stepper: {
+    maxWidth: '750px',
+    margin: 'auto',
   },
 }));
 
@@ -114,7 +118,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createClient(data, setErrorSubmit));
+    dispatch(createClient(data, setErrorSubmit, setActiveStep));
   };
 
   const handleNewForm = () => {
@@ -134,8 +138,8 @@ function App() {
   };
 
   return (
-    <Container className={classes.root}>
-      <Stepper activeStep={activeStep}>
+    <>
+      <Stepper activeStep={activeStep} className={classes.stepper}>
         {steps.map((label) => {
           const stepProps = {};
           const labelProps = {};
@@ -147,47 +151,48 @@ function App() {
           );
         })}
       </Stepper>
+      <Container className={classes.root}>
+        <form
+          className={classes.formItem}
+          onSubmit={handleSubmit}
+          noValidate
+          autoComplete="off"
+        >
+          {activeStep === 0 ? (
+            <FirstStep handleNext={handleNext} data={data} setData={setData} />
+          ) : (
+            ''
+          )}
 
-      <form
-        className={classes.formItem}
-        onSubmit={handleSubmit}
-        noValidate
-        autoComplete="off"
-      >
-        {activeStep === 0 ? (
-          <FirstStep handleNext={handleNext} data={data} setData={setData} />
-        ) : (
-          ''
-        )}
-
-        {activeStep === 1 ? (
-          <SecondStep
-            handleNext={handleNext}
-            handleBack={handleBack}
-            validateEmail={validateEmail}
-            validatePhoneNumber={validatePhoneNumber}
-            data={data}
-            setData={setData}
-            setValidPhone={setValidPhone}
-            phoneErr={phoneErr}
-            setValidEmail={setValidEmail}
-            emailErr={emailErr}
-          />
-        ) : (
-          ''
-        )}
-        {activeStep === 2 ? (
-          <ThirdStep
-            data={data}
-            handleBack={handleBack}
-            errorSubmit={errorSubmit}
-            handleNewForm={handleNewForm}
-          />
-        ) : (
-          ''
-        )}
-      </form>
-    </Container>
+          {activeStep === 1 ? (
+            <SecondStep
+              handleNext={handleNext}
+              handleBack={handleBack}
+              validateEmail={validateEmail}
+              validatePhoneNumber={validatePhoneNumber}
+              data={data}
+              setData={setData}
+              setValidPhone={setValidPhone}
+              phoneErr={phoneErr}
+              setValidEmail={setValidEmail}
+              emailErr={emailErr}
+            />
+          ) : (
+            ''
+          )}
+          {activeStep === 2 || activeStep === 3 ? (
+            <ThirdStep
+              data={data}
+              handleBack={handleBack}
+              errorSubmit={errorSubmit}
+              handleNewForm={handleNewForm}
+            />
+          ) : (
+            ''
+          )}
+        </form>
+      </Container>
+    </>
   );
 }
 

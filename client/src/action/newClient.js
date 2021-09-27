@@ -10,20 +10,22 @@ export const getClients = () => async (dispatch) => {
   }
 };
 
-export const createClient = (client, setErrorSubmit) => async (dispatch) => {
-  try {
-    const { data } = await api.createClient(client);
+export const createClient =
+  (client, setErrorSubmit, setActiveStep) => async (dispatch) => {
+    try {
+      const { data } = await api.createClient(client);
 
-    dispatch({ type: 'CREATE', payload: data });
-    setErrorSubmit({
-      hasError: false,
-      message: 'Formulář úspěšně odeslán.',
-    });
-  } catch (error) {
-    console.log(error);
-    setErrorSubmit({
-      hasError: true,
-      message: 'Formulář se nepodařilo odeslat. Zkuste to prosím později.',
-    });
-  }
-};
+      dispatch({ type: 'CREATE', payload: data });
+      setErrorSubmit({
+        hasError: false,
+        message: '',
+      });
+      setActiveStep(3);
+    } catch (error) {
+      console.log(error);
+      setErrorSubmit({
+        hasError: true,
+        message: 'Formulář se nepodařilo odeslat. Zkuste to prosím později.',
+      });
+    }
+  };
