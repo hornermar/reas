@@ -1,3 +1,9 @@
+body {
+  margin: 0;
+  font-family: 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
 .region {
   fill: transparent;
   stroke: #3f51b5;

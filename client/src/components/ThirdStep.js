@@ -1,9 +1,8 @@
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import ErrorHandler from './ErrorHandler';
+import ErrorSubmit from './ErrorSubmit';
 
 const ThirdStep = (props) => {
-  console.log(props.errorHandler.hasError);
   return (
     <>
       <Typography variant="h5" gutterBottom>
@@ -17,11 +16,11 @@ const ThirdStep = (props) => {
       <p>Telefonní číslo: {props.data.phone}</p>
       <p>Email: {props.data.email}</p>
 
-      <ErrorHandler errorHandler={props.errorHandler} />
+      <ErrorSubmit errorSubmit={props.errorSubmit} />
 
       <Button
         disabled={
-          props.errorHandler.hasError || props.errorHandler.hasError === ''
+          props.errorSubmit.hasError || props.errorSubmit.hasError === ''
             ? false
             : true
         }
@@ -29,12 +28,12 @@ const ThirdStep = (props) => {
         variant="contained"
         color="primary"
       >
-        {props.errorHandler.hasError || props.errorHandler.hasError === ''
+        {props.errorSubmit.hasError || props.errorSubmit.hasError === ''
           ? 'Odeslat formulář'
           : 'Úspěšně odesláno'}
       </Button>
 
-      {props.errorHandler.hasError || props.errorHandler.hasError === '' ? (
+      {props.errorSubmit.hasError || props.errorSubmit.hasError === '' ? (
         <Button variant="contained" color="primary" onClick={props.handleBack}>
           Zpět
         </Button>

@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
+import './style.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,9 +34,9 @@ function getSteps() {
 
 function App() {
   const classes = useStyles();
+  const steps = getSteps();
 
   const [activeStep, setActiveStep] = useState(0);
-  const steps = getSteps();
   const [data, setData] = useState({
     estateType: '',
     region: '',
@@ -46,17 +47,15 @@ function App() {
   });
 
   const [validPhone, setValidPhone] = useState(true);
-  const [numberErr, setNumberErr] = useState(false);
+  const [phoneErr, setPhoneErr] = useState(false);
 
   const [validEmail, setValidEmail] = useState(true);
   const [emailErr, setEmailErr] = useState(false);
 
-  const [errorHandler, setErrorHandler] = useState({
+  const [errorSubmit, setErrorSubmit] = useState({
     hasError: '',
     message: '',
   });
-
-  console.log(data);
 
   const dispatch = useDispatch();
 
@@ -64,16 +63,16 @@ function App() {
     dispatch(getClients());
   }, [dispatch]);
 
-  const validatePhoneNumber = (input_str) => {
+  const validatePhoneNumber = (input) => {
     var re = /^\d+$/;
-    const withoutSpace = input_str.replace(/ /g, '');
+    const stringWithoutSpaces = input.replace(/ /g, '');
 
-    if (withoutSpace.length === 9 && re.test(withoutSpace)) {
+    if (stringWithoutSpaces.length === 9 && re.test(stringWithoutSpaces)) {
       return true;
     } else if (
-      withoutSpace.length === 13 &&
-      withoutSpace.startsWith('+420') &&
-      re.test(withoutSpace.slice(4, 12))
+      stringWithoutSpaces.length === 13 &&
+      stringWithoutSpaces.startsWith('+420') &&
+      re.test(stringWithoutSpaces.slice(4, 13))
     ) {
       return true;
     } else {
@@ -84,7 +83,6 @@ function App() {
   const validateEmail = (input) => {
     var re =
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
     return re.test(input);
   };
 
@@ -94,9 +92,9 @@ function App() {
     }
 
     if (!validPhone) {
-      setNumberErr(true);
+      setPhoneErr(true);
     } else {
-      setNumberErr(false);
+      setPhoneErr(false);
     }
 
     if (!validEmail) {
@@ -108,11 +106,15 @@ function App() {
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    setErrorSubmit({
+      hasError: '',
+      message: '',
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createClient(data, setErrorHandler));
+    dispatch(createClient(data, setErrorSubmit));
   };
 
   const handleNewForm = () => {
@@ -125,7 +127,7 @@ function App() {
       email: '',
     });
     setActiveStep(0);
-    setErrorHandler({
+    setErrorSubmit({
       hasError: '',
       message: '',
     });
@@ -162,24 +164,23 @@ function App() {
           <SecondStep
             handleNext={handleNext}
             handleBack={handleBack}
+            validateEmail={validateEmail}
+            validatePhoneNumber={validatePhoneNumber}
             data={data}
             setData={setData}
-            validPhone={validPhone}
             setValidPhone={setValidPhone}
-            validatePhoneNumber={validatePhoneNumber}
-            numberErr={numberErr}
-            validateEmail={validateEmail}
+            phoneErr={phoneErr}
             setValidEmail={setValidEmail}
             emailErr={emailErr}
           />
         ) : (
           ''
         )}
-        {activeStep === 2 || errorHandler.hasError ? (
+        {activeStep === 2 ? (
           <ThirdStep
             data={data}
             handleBack={handleBack}
-            errorHandler={errorHandler}
+            errorSubmit={errorSubmit}
             handleNewForm={handleNewForm}
           />
         ) : (

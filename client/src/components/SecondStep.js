@@ -29,8 +29,12 @@ const SecondStep = (props) => {
         }}
         label="Telefonní číslo"
         id="phone-number"
-        error={props.numberErr ? true : false}
-        helperText={props.numberErr ? 'Neplatné telefonní číslo.' : ''}
+        error={props.phoneErr ? true : false}
+        helperText={
+          props.phoneErr
+            ? 'Neplatné telefonní číslo (Formát: +420 XXX XXX XXX nebo XXX XXX XXX)'
+            : ''
+        }
       />
 
       <TextField

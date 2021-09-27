@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import Alert from '@mui/material/Alert';
 
-const ErrorHandler = (props) => {
+const ErrorSubmit = (props) => {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
     setShow(false);
-    if (props.errorHandler.hasError) {
+    if (props.errorSubmit.hasError) {
       setShow(true);
     }
-  }, [props.errorHandler]);
+  }, [props.errorSubmit]);
 
   return (
     <>
       {show ? (
         <div>
-          <Alert severity="error">{props.errorHandler.message}</Alert>
+          <Alert severity="error">{props.errorSubmit.message}</Alert>
         </div>
       ) : (
         ''
@@ -24,4 +24,4 @@ const ErrorHandler = (props) => {
   );
 };
 
-export default ErrorHandler;
+export default ErrorSubmit;
