@@ -20,3 +20,7 @@
 .region_active {
   fill: #3f51b5;
 }
+
+svg {
+  cursor: pointer;
+}

@@ -52,9 +52,6 @@ const SecondStep = (props) => {
         color="primary"
         onClick={props.handleNext}
         disabled={
-          props.data.estateType === '' ||
-          props.data.region === '' ||
-          props.data.district === '' ||
           props.data.phone === '' ||
           props.data.email === '' ||
           props.data.fullName === ''

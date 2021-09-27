@@ -3,15 +3,12 @@ import FirstStep from './components/FirstStep';
 import SecondStep from './components/SecondStep';
 import ThirdStep from './components/ThirdStep';
 import Container from '@material-ui/core/Container';
-
 import { useDispatch } from 'react-redux';
 import { createClient, getClients } from './action/newClient';
-
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-import FourthStep from './components/FourthStep';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,8 +51,12 @@ function App() {
   const [validEmail, setValidEmail] = useState(true);
   const [emailErr, setEmailErr] = useState(false);
 
-  // console.log(validPhone);
-  // console.log(data.phone);
+  const [errorHandler, setErrorHandler] = useState({
+    hasError: '',
+    message: '',
+  });
+
+  console.log(data);
 
   const dispatch = useDispatch();
 
@@ -66,8 +67,6 @@ function App() {
   const validatePhoneNumber = (input_str) => {
     var re = /^\d+$/;
     const withoutSpace = input_str.replace(/ /g, '');
-
-    // console.log(withoutSpace);
 
     if (withoutSpace.length === 9 && re.test(withoutSpace)) {
       return true;
@@ -113,8 +112,23 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createClient(data));
-    setActiveStep(3);
+    dispatch(createClient(data, setErrorHandler));
+  };
+
+  const handleNewForm = () => {
+    setData({
+      estateType: '',
+      region: '',
+      district: '',
+      fullName: '',
+      phone: '',
+      email: '',
+    });
+    setActiveStep(0);
+    setErrorHandler({
+      hasError: '',
+      message: '',
+    });
   };
 
   return (
@@ -161,14 +175,17 @@ function App() {
         ) : (
           ''
         )}
-
-        {activeStep === 2 ? (
-          <ThirdStep data={data} handleBack={handleBack} />
+        {activeStep === 2 || errorHandler.hasError ? (
+          <ThirdStep
+            data={data}
+            handleBack={handleBack}
+            errorHandler={errorHandler}
+            handleNewForm={handleNewForm}
+          />
         ) : (
           ''
         )}
       </form>
-      {activeStep === 3 ? <FourthStep /> : ''}
     </Container>
   );
 }

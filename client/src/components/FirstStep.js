@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
@@ -11,8 +11,8 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import Container from '@material-ui/core/Container';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import { makeStyles } from '@material-ui/core/styles';
+import style from './style.css';
 
 const useStyles = makeStyles((theme) => ({
   regionMap: {
@@ -36,7 +36,9 @@ const FirstStep = (props) => {
   );
 
   const handleClick = (e) => {
-    props.setData({ ...props.data, region: e.target.id });
+    if (e.target.id !== props.data.region) {
+      props.setData({ ...props.data, region: e.target.id, district: '' });
+    }
   };
 
   const filteredDistrict = filteredRegion.map((item) => item.district);
